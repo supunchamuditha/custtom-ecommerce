@@ -1,7 +1,9 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { LinkContainer } from 'react-router-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap';
+import img from '../assets/logo.png'
+
 
 function Header() {
   return (
@@ -9,7 +11,16 @@ function Header() {
     <Navbar bg='dark' variant='dark' expand="lg" className="bg-body-black">
       <Container fluid>
         <LinkContainer to='/'>
-          <Navbar.Brand>Custom</Navbar.Brand>
+        <Navbar.Brand>
+        <img 
+          src={img} 
+          width={30} 
+          height={30} 
+          className="d-inline-block align-top" 
+          alt="Logo"
+        />
+
+        </Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
@@ -21,7 +32,10 @@ function Header() {
             <LinkContainer to='/cart'>
             <Nav.Link> <i className='fas fa-shopping-cart'></i> Cart</Nav.Link>
             </LinkContainer>
-            <LinkContainer to='/login'>
+
+          </Nav>
+          <Nav>
+          <LinkContainer to='/login'>
             <Nav.Link> <i className='fas fa-user'></i> Login</Nav.Link>
             </LinkContainer>
           </Nav>
