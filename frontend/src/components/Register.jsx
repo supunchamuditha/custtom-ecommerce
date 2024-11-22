@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 import Form from "react-bootstrap/Form";
 import "./Register.css";
 import { useState } from "react";
 import axios from "axios";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+=======
+import Form from 'react-bootstrap/Form';
+import './Register.css';
+import { Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+>>>>>>> 4a7ea22a9b778f3517905062958dd9655a00ecb9
 
 function Register() {
   const [fullName, setFullName] = useState("");
@@ -45,6 +52,7 @@ function Register() {
   };
   return (
     <>
+<<<<<<< HEAD
       <div className="rb">
         <Container>
           <br />
@@ -141,6 +149,54 @@ function Register() {
           </center>
         </Container>
       </div>
+=======
+    <div className='rb'>
+    <Container>
+    <br />
+    <center>
+    <h1>Register</h1>
+    </center>
+    <br />
+    <Form>
+      <Form.Group className="mb-3" controlId="formGroupFullName">
+        <Form.Label>Full Name</Form.Label>
+        <Form.Control type="text" placeholder="Full Name" className="input"/>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formGroupUsername">
+        <Form.Label>User Name</Form.Label>
+        <Form.Control type="username" placeholder="Enter Username" className="input" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formGroupEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control type="email" placeholder="Enter email" className="input"/>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formGroupPhone">
+        <Form.Label>Phone Number</Form.Label>
+        <Form.Control type="text" placeholder="Phone" className="input"/>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formGroupAddress">
+        <Form.Label>Address</Form.Label>
+        <Form.Control type="text" placeholder="Address"  className="input"/>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formGroupPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password" className="input" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formGroupConfirmPassword">
+        <Form.Label>Confirm Password</Form.Label>
+        <Form.Control type="password" placeholder="ConfirmPassword" className="input" />
+      </Form.Group>
+      <br />
+      <Form.Control type="submit" placeholder="Register Now" className='submit-btn'/>
+    </Form>
+    <br />
+    <br />
+    <center>
+        <p> Have an Account ?<Link to="/login"><span > LogIn Now</span></Link></p>
+    </center>
+    </Container>
+    </div>
+>>>>>>> 4a7ea22a9b778f3517905062958dd9655a00ecb9
     </>
   );
 }
