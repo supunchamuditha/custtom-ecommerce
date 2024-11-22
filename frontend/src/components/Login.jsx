@@ -1,16 +1,9 @@
-<<<<<<< HEAD
 import Form from "react-bootstrap/Form";
 import "./Login.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { Container } from "react-bootstrap";
-=======
-import Form from 'react-bootstrap/Form';
-import './Login.css';
-import { Link } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
->>>>>>> 4a7ea22a9b778f3517905062958dd9655a00ecb9
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -44,7 +37,6 @@ function Login() {
 
   return (
     <>
-<<<<<<< HEAD
       <div className="page-background">
         <Container>
           <br />
@@ -92,7 +84,6 @@ function Login() {
           </center>
         </Container>
       </div>
-=======
     
     <div className='page-background'>
     <Container>
@@ -121,7 +112,6 @@ function Login() {
     </Container>
     </div>
     
->>>>>>> 4a7ea22a9b778f3517905062958dd9655a00ecb9
     </>
   );
 }
