@@ -1,50 +1,95 @@
-import { useState, useEffect } from 'react';
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
+import { Row, Col, Image, ListGroup, Card, Button, Container } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
+import img1 from '../assets/prekirisamba.jpg';
+import img2 from '../assets/sudukekulu.png';
+import img3 from '../assets/supirinadu.jpg';
+import img4 from '../assets/supirisamba.jpg';
 
-axios.defaults.baseURL = '/api';
+// Static product data for frontend-only implementation
+const products = [
+  {
+    _id: 1,
+    name: 'Premium kiri Samba',
+    image: img1,
+    description: 'High-quality Prekiri Samba rice, perfect for meals.',
+    rating: 4.5,
+    numReviews: 25,
+    price: 2400.99,
+    countInStock: 10,
+  },
+  {
+    _id: 2,
+    name: 'Sudu Kekulu sahal',
+    image: img2,
+    description: 'Fresh Sudu Kekulu rice, grown organically.',
+    rating: 3.9,
+    numReviews: 30,
+    price: 2099.99,
+    countInStock: 5,
+  },
+  {
+    _id: 3,
+    name: 'Supiri Nadu',
+    image: img3,
+    description: 'Premium Supiri Nadu rice, rich in flavor.',
+    rating: 4.2,
+    numReviews: 15,
+    price: 1899.99,
+    countInStock: 2,
+  },
+  {
+    _id: 4,
+    name: 'Supiri Samba',
+    image: img4,
+    description: 'The finest Supiri Samba rice for your family.',
+    rating: 5.0,
+    numReviews: 50,
+    price: 2299.99,
+    countInStock: 0,
+  },
+];
 
 function ProductScreen() {
-  const [product, setProduct] = useState({});
   const { id } = useParams(); // Extracting _id from route parameters
+  const product = products.find((p) => p._id === Number(id)); // Find the product based on the id
 
-  useEffect(() => {
-    async function fetchProduct() {
-      try {
-        // Convert _id to a number before making the API call
-        const { data } = await axios.get(`/products/${Number(id)}`);
-        setProduct(data);
-      } catch (error) {
-        console.error('Error fetching product:', error);
-      }
-    }
-
-    fetchProduct();
-  }, [id]); // Add _id as a dependency to re-run useEffect when it changes
+  if (!product) {
+    return (
+      <div>
+        <h2>Product not found!</h2>
+        <Link to="/" className="btn btn-light my-3">Go Back</Link>
+      </div>
+    );
+  }
 
   return (
     <div>
+      <Container>
       {/* Back button to return to the homepage */}
       <Link to='/' className='btn btn-light my-3'>Go Back</Link>
       <Row>
         {/* Product image section */}
-        <Col md={6}>
-          <Image src={`http://127.0.0.1:8000${product.image}`} alt={product.name} fluid />
+        <Col md={6} lg={6}> {/* Increased width for the image */}
+        <Image
+          src={product.image}
+          alt={product.name}
+          style={{ maxHeight: "600px", objectFit: "cover" }} // Set max height and fit
+          fluid
+        />
         </Col>
 
         {/* Product details and rating */}
-        <Col md={3}>
-          <ListGroup variant='flush'>
+        <Col md={3} lg={2}> {/* Reduced width for details */}
+          <ListGroup variant="flush">
             <ListGroup.Item>
               <h3>{product.name}</h3>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'#f8e825'} />
+              <Rating value={product.rating} text={`${product.numReviews} reviews`} color={"#f8e825"} />
             </ListGroup.Item>
             <ListGroup.Item>
-              Price: ${product.price}
+              Price: Rs:{product.price}
             </ListGroup.Item>
             <ListGroup.Item>
               Description: {product.description}
@@ -52,10 +97,10 @@ function ProductScreen() {
           </ListGroup>
         </Col>
 
-        {/* Purchase options (Price, Stock Status, Add to Cart) */}
-        <Col md={3}>
+        {/* Purchase options */}
+        <Col md={2} lg={2}> {/* Adjusted width for purchase options */}
           <Card>
-            <ListGroup variant='flush'>
+            <ListGroup variant="flush">
               <ListGroup.Item>
                 <Row>
                   <Col>Price:</Col>
@@ -64,23 +109,14 @@ function ProductScreen() {
                   </Col>
                 </Row>
               </ListGroup.Item>
-
               <ListGroup.Item>
                 <Row>
                   <Col>Status:</Col>
-                  <Col>
-                    {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
-                  </Col>
+                  <Col>{product.countInStock > 0 ? "In Stock" : "Out of Stock"}</Col>
                 </Row>
               </ListGroup.Item>
-
               <ListGroup.Item>
-                {/* The button is fully width-aligned with 'w-100' */}
-                <Button
-                  className='w-100'
-                  type='button'
-                  disabled={product.countInStock === 0} // Disable button if the product is out of stock
-                >
+                <Button className="w-100" type="button" disabled={product.countInStock === 0}>
                   Add To Cart
                 </Button>
               </ListGroup.Item>
@@ -88,6 +124,7 @@ function ProductScreen() {
           </Card>
         </Col>
       </Row>
+      </Container>
     </div>
   );
 }
