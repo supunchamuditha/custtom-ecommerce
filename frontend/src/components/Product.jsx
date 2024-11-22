@@ -8,7 +8,8 @@ function Product({ product }) {
     <Card className='my-3 p-3 rounded'>
       {/* Correctly pass the _id in the URL */}
       <Link to={`/product/${String(product._id)}`}>
-        <Card.Img src={`http://127.0.0.1:8000${product.image}`} alt={product.name} />
+        {/* Use the image directly from the product object */}
+        <Card.Img src={product.image} alt={product.name} />
       </Link>
       <Card.Body>
         <Link to={`/product/${String(product._id)}`}>
@@ -23,7 +24,7 @@ function Product({ product }) {
           </div>
         </Card.Text>
 
-        <Card.Text as='h3'>${product.price}</Card.Text>
+        <Card.Text as='h3'>Rs:{product.price}</Card.Text>
       </Card.Body>
     </Card>
   );
@@ -31,9 +32,9 @@ function Product({ product }) {
 
 Product.propTypes = {
   product: PropTypes.shape({
-    _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,  // Adjusted to allow either string or number for _id
+    _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // Adjusted to allow either string or number for _id
     name: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired, // Ensure `image` is a string path or import
     rating: PropTypes.number.isRequired,
     numReviews: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,

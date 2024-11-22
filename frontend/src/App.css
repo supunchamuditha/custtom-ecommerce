@@ -1,0 +1,10 @@
+/* App.css */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Ensures the navbar stays above other content */
+  }
+  
+.main{
+    padding-top: 90px;
+}
